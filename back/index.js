@@ -17,6 +17,12 @@ async function selectTest(){
     .then(res => console.log(res.rows))
     .catch(err => console.log(err))
 }
+async function insertTest(){
+    pool.query(`INSERT INTO "Notes" (name) VALUES ('asdasd')`)
+    .then(res => console.log(res.rows))
+    .catch(err => console.log(err))
+}
+
 //--DB
 
 
@@ -39,9 +45,9 @@ app.get('/login', (req, res) => {
     res.send('login');
 })
 
-app.get('/login', (req, res) => {
-    selectTest();
-    res.send('login');
+app.get('/add', (req, res) => {
+    insertTest();
+    res.send('add');
 })
 
 
