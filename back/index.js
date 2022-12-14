@@ -2,7 +2,25 @@ const express = require('express')
 const cors = require('cors');
 const app = express()
 const port = 3000
-const test = 0;
+//++DB
+const { Pool } = require('pg')
+const pool = new Pool({
+    user: "postgres",
+    database: "Dogs",
+    port: 5432,
+    host: "localhost",
+    password: "postgres",
+})
+
+async function selectTest(){
+    pool.query('SELECT * FROM "Notes"')
+    .then(res => console.log(res.rows))
+    .catch(err => console.log(err))
+}
+//--DB
+
+
+
 
 app.use(cors({
     origin: '*'
@@ -17,8 +35,15 @@ app.get('/registration', (req, res) => {
 })
 
 app.get('/login', (req, res) => {
-    res.send('login')
+    selectTest();
+    res.send('login');
 })
+
+app.get('/login', (req, res) => {
+    selectTest();
+    res.send('login');
+})
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
